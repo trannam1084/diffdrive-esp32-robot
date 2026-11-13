@@ -1,0 +1,15 @@
+# PlatformIO
+.pio/
+.vscode/
+
+# Thông tin Wi-Fi thật (chỉ commit secrets.example.h)
+include/secrets.h
+
+# Log đo đạc khi tune
+logs/
+*.log
+*.csv
+
+# Python / hệ điều hành
+__pycache__/
+.DS_Store

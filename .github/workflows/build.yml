@@ -1,0 +1,37 @@
+name: Build firmware
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pip
+            ~/.platformio/.cache
+          key: pio-${{ runner.os }}-${{ hashFiles('platformio.ini') }}
+
+      - name: Cài PlatformIO
+        run: pip install platformio
+
+      - name: Tạo secrets.h giả (không có mật khẩu thật trên CI)
+        run: cp include/secrets.example.h include/secrets.h
+
+      - name: Build (bản thường và bản telemetry)
+        if: hashFiles('src/main.cpp') != ''
+        run: pio run -e esp32dev -e telemetry
+
+      - name: Nhắc thiếu main.cpp
+        if: hashFiles('src/main.cpp') == ''
+        run: echo "::warning::Chưa có src/main.cpp nên bỏ qua bước build."
