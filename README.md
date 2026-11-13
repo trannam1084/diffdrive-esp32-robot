@@ -49,7 +49,7 @@ Chi tiết các lớp, trạng thái và thứ tự xử lý mỗi chu kỳ: [do
 Cần [PlatformIO](https://platformio.org/) (VS Code extension hoặc CLI).
 
 ```bash
-git clone https://github.com/<user>/diffdrive-esp32-robot.git
+git clone https://github.com/trannam1084/diffdrive-esp32-robot.git
 cd diffdrive-esp32-robot
 
 # 1. Tạo file cấu hình Wi-Fi (không bị commit)
